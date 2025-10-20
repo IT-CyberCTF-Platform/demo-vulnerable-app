@@ -7,72 +7,84 @@ session_start();
     1 => [
         'name' => 'Premium Headphones',
         'price' => 79.99,
+        'hidden'=> false,
         'description' => 'High-quality wireless headphones with noise cancellation.',
         'image' => 'https://picsum.photos/seed/headphones/400/300.jpg'
     ],
     2 => [
         'name' => 'Smart Watch',
         'price' => 199.99,
+        'hidden'=> false,
         'description' => 'Track your fitness and stay connected with our latest smartwatch.',
         'image' => 'https://picsum.photos/seed/smartwatch/400/300.jpg'
     ],
     3 => [
         'name' => 'Laptop Stand',
         'price' => 39.99,
+        'hidden'=> false,
         'description' => 'Ergonomic aluminum laptop stand for better posture.',
         'image' => 'https://picsum.photos/seed/laptopstand/400/300.jpg'
     ],
     4 => [
         'name' => 'Wireless Mouse',
         'price' => 29.99,
+        'hidden'=> false,
         'description' => 'Precision wireless mouse with long battery life.',
         'image' => 'https://picsum.photos/seed/mouse/400/300.jpg'
     ],
     5 => [
         'name' => 'USB-C Hub',
         'price' => 49.99,
+        'hidden'=> false,
         'description' => 'Multi-port USB-C hub with HDMI, USB 3.0, and SD card reader.',
         'image' => 'https://picsum.photos/seed/usbhub/400/300.jpg'
     ],
     6 => [
         'name' => 'Mechanical Keyboard',
         'price' => 89.99,
+        'hidden'=> false,
         'description' => 'RGB mechanical keyboard with customizable keys.',
         'image' => 'https://picsum.photos/seed/keyboard/400/300.jpg'
     ],
     7 => [
         'name' => 'Webcam HD',
         'price' => 59.99,
+        'hidden'=> false,
         'description' => '1080p HD webcam with auto-focus and noise reduction.',
         'image' => 'https://picsum.photos/seed/webcam/400/300.jpg'
     ],
     8 => [
         'name' => 'Phone Stand',
         'price' => 15.99,
+        'hidden'=> false,
         'description' => 'Adjustable phone stand for desk and table use.',
         'image' => 'https://picsum.photos/seed/phonestand/400/300.jpg'
     ],
     9 => [
         'name' => 'Cable Organizer',
         'price' => 12.99,
+        'hidden'=> false,
         'description' => 'Keep your cables tidy with our magnetic organizer.',
         'image' => 'https://picsum.photos/seed/cableorg/400/300.jpg'
     ],
     10 => [
         'name' => 'Portable Charger',
         'price' => 34.99,
+        'hidden'=> false,
         'description' => '10000mAh portable charger with fast charging.',
         'image' => 'https://picsum.photos/seed/charger/400/300.jpg'
     ],
     11 => [
         'name' => 'Bluetooth Speaker',
         'price' => 45.99,
+        'hidden'=> false,
         'description' => 'Waterproof Bluetooth speaker with 12-hour battery life.',
         'image' => 'https://picsum.photos/seed/speaker/400/300.jpg'
     ],
     12 => [
         'name' => 'Tablet Case',
         'price' => 24.99,
+        'hidden'=> false,
         'description' => 'Protective tablet case with built-in stand.',
         'image' => 'https://picsum.photos/seed/tabletcase/400/300.jpg'
     ],
@@ -80,6 +92,7 @@ session_start();
     209 => [
         'name' => 'Secret Product',
         'price' => 999.99,
+        'hidden'=> true,
         'description' => 'This product contains a secret: ' . getenv("FLAG"),
         'image' => 'https://picsum.photos/seed/secret/400/300.jpg'
     ]
@@ -104,7 +117,7 @@ if (isset($_GET['api'])) {
         // Return all visible products (excluding the hidden one)
         $visibleProducts = [];
         foreach ($products as $id => $product) {
-            if ($id !== 1337) { // Skip the hidden product
+            if (!$product['hidden']) { // Skip the hidden product
                 $visibleProducts[md5($id)] = array_merge(['id' => $id], $product);
             }
         }
